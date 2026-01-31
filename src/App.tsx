@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  function increasecount() {
+    setCount(count + 1);
+  }
+  function decreasecount(){
+    setCount(count - 1);
+  }
+  function resetcount (){
+    setCount(0)
+  }
+
+  useEffect(function(){
+    setInterval(function(){
+      setCount(c => c+1)
+    },1000)
+  },[]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="text-center text-2xl mt-10">
+      <h1>{count}</h1>
+      <br />
+      <div className="flex gap-1 justify-center text-sm">
+        <button
+          onClick={increasecount}
+          className="hover:cursor-pointer border p-1"
+        >
+          increase count
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button
+          onClick={decreasecount}
+          className="hover:cursor-pointer border p-1"
+        >
+          decrease count
+         </button> 
+        <button
+          onClick={resetcount}
+          className="hover:cursor-pointer border p-1"
+        >
+          reset count
+         </button> 
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
 export default App
